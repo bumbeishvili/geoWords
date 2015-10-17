@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html ng-app="GeoWords" >
+﻿<!DOCTYPE html>
+<html  >
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> არი </title>
+    <title> მოძებნე ^_^ </title>
     <link href="css/geokbd/jquery.geokbd.css" rel="stylesheet" type="text/css" />
 	 <link href="css/custom/app.css" rel="stylesheet" type="text/css" />
 	
@@ -16,36 +16,18 @@
 	<link rel="shortcut icon" type="image/x-icon" href="img/icon.png" />
 
 </head>
-<body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">GeoWords</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class='list-nav @Html.IsSelected(actions: "Query", controllers: "GeoWords")'><a href="/GeoWords/Query">Filter </a></li>
-                    <li class='list-nav @Html.IsSelected(actions: "RhymeFinder", controllers: "GeoWords")'><a href="/GeoWords/RhymeFinder">Rhyme Finder</a></li>
-                    <li class='list-nav @Html.IsSelected(actions: "FindSimilar", controllers: "GeoWords")'><a href="/GeoWords/FindSimilar" >Similar Words</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <div class="container body-content">
-        <geo-Words-Query /> </geo-Words-Query>
+<body ng-app="GeoWords" ng-controller="pageCtrl">
+    <geo-navbar></geo-navbar>
+    <div class="container body-content"  >
+        <wild-card-content ng-show="contents.wildCardContent.active" /> </wild-card-content>
+        <regex-content ng-show="contents.regexContent.active" /> </regex-content>
+        <rhyme-Content ng-show="contents.rhymeContent.active" /> </rhyme-Content>
+
+
         <hr />
         <footer>
             <span>&copy; <a href="https://www.facebook.com/Davit.Bumbeishvili" target="_blank">Dato</a> 
             </span>
-           
         </footer>
     </div>
     
@@ -53,11 +35,13 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	
-    <script type="text/javascript" src="js/custom/app.js"></script>
-    <script src="js/plugins/geokbd/jquery.geokbd.js"></script>
+  
 	
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<script src="js/controllers/controllers.js"></script>
 	<script src="js/directives/directives.js"></script>
+	
+    <script src="js/plugins/geokbd/jquery.geokbd.js"></script>
+	  <script type="text/javascript" src="js/custom/app.js"></script>
 </body>
 </html>

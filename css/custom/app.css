@@ -11,10 +11,11 @@
     background-color: #275024 !important;
     border-color: #085C26 !important;
 }
-#panel{
-    display:none;
-}
 
 body{
     padding-top:0px !important;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
 }
