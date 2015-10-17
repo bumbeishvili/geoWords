@@ -1,10 +1,11 @@
-    <div ng-show="{{examples.length}}">
-	<button ng-click = "slidePlease()" class="btn btn-info examples" type="button">
-        შაბლონების მაგალითები <span class="glyphicon glyphicon-chevron-down"></span>
+
+<div ng-show="{{examples.length}}">
+    <button ng-click="slidePlease()" class="btn btn-info examples" type="button">
+        {{buttonText}} <span class="glyphicon glyphicon-chevron-down"></span>
     </button>
     <div id="{{uniqueName}}" style="display:none">
         <table>
-		     <tr ng-repeat='example in examples'>
+            <tr ng-repeat='example in examples'>
                 <td>
                     <span class="label label-{{example.labelStatus}}">{{example.labelValue}}</span>
                 </td>
@@ -12,7 +13,6 @@
                     <span>{{example.definition}} </span>
                 </td>
             </tr>
-        </table
+        </table>
     </div>
-	</div>
-	
+</div>

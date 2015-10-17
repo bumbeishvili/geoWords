@@ -1,47 +1,54 @@
 ﻿<!DOCTYPE html>
-<html  >
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> მოძებნე ^_^ </title>
     <link href="css/geokbd/jquery.geokbd.css" rel="stylesheet" type="text/css" />
-	 <link href="css/custom/app.css" rel="stylesheet" type="text/css" />
-	
-	<!-- Latest compiled and minified CSS -->
+    <link href="css/custom/app.css" rel="stylesheet" type="text/css" />
+
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="img/icon.png" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/icon.png" />
 
 </head>
 <body ng-app="GeoWords" ng-controller="pageCtrl">
     <geo-navbar></geo-navbar>
-    <div class="container body-content"  >
-        <wild-card-content ng-show="contents.wildCardContent.active" /> </wild-card-content>
-        <regex-content ng-show="contents.regexContent.active" /> </regex-content>
-        <rhyme-Content ng-show="contents.rhymeContent.active" /> </rhyme-Content>
+    <div class="container body-content">
+        <wild-card-content ng-show="contents.wildCardContent.active">
+        </wild-card-content>
+
+        <regex-content ng-show="contents.regexContent.active">
+        </regex-content>
+
+        <rhyme-content ng-show="contents.rhymeContent.active">
+        </rhyme-content>
+
 
 
         <hr />
         <footer>
-            <span>&copy; <a href="https://www.facebook.com/Davit.Bumbeishvili" target="_blank">Dato</a> 
+            <span>
+                &copy; <a href="https://www.facebook.com/Davit.Bumbeishvili" target="_blank">Dato</a>
             </span>
         </footer>
     </div>
-    
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	
-  
-	
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-	<script src="js/controllers/controllers.js"></script>
-	<script src="js/directives/directives.js"></script>
-	
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/directives/directives.js"></script>
+
     <script src="js/plugins/geokbd/jquery.geokbd.js"></script>
-	  <script type="text/javascript" src="js/custom/app.js"></script>
+    <script type="text/javascript" src="js/custom/app.js"></script>
 </body>
 </html>

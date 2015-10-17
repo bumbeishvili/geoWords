@@ -19,7 +19,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ;(function($, undefined) {
 
-$.fn.geokbd = function(options) {
+    $.fn.geokbd = function (options) {
+        
 	var 
 	isOn, 
 	inputs = $([]),
@@ -121,14 +122,16 @@ $.fn.geokbd = function(options) {
 				range.text = this;
 			}
 		} else if (field.selectionStart != undefined) {
+		    
 			var scroll = field.scrollTop, start = field.selectionStart, end = field.selectionEnd;
 			var value = field.value.substr(0, start) + this + field.value.substr(end, field.value.length);
 			field.value = value;
 			field.scrollTop = scroll;
-			field.setSelectionRange(start + this.length, start + this.length); 
+			field.setSelectionRange(start + this.length, start + this.length);
+			$(field).trigger('input');
 		} else {
 			field.value += this;
-			field.setSelectionRange(field.value.length, field.value.length);    
+			field.setSelectionRange(field.value.length, field.value.length);
 		}
 	};
 }

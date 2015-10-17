@@ -5,7 +5,7 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
     $scope.contents = {
         wildCardContent: {
             active: 'active',
-            header: 'ვაილდქარდი'
+            header: 'wildCards'
         },
         regexContent: {
             active: '',
@@ -27,25 +27,62 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
 
 myApp.controller('regexCtrl', ['$scope', function ($scope) {
     $scope.uniqueName = 'regexTemplatePanel';
+    $scope.placeholder = 'მიუთითეთ რეჯექსი';
+    $scope.buttonText = 'რეჯექსების მაგალითები'
     $scope.examples = [{
         labelStatus: 'success',
         labelValue: '.',
         definition: 'წამოიღებს მხოლოდ ერთ ასობგერიან სიტყვებს'
     }]
-    $scope.searchAction = function (word) {
 
+    $scope.searchAction = function (word) {
+        $scope.result = [
+            { value: word },
+            { value: 'რეჯექსი' },
+            { value: 'რეჯ' },
+            { value: 'რეჯწდადა' },
+            { value: 'რეჯდფაწდწა' },
+            { value: 'რეჯდწადწა' },
+            { value: 'რეჯდწადწა' },
+            { value: word },
+            { value: 'რეჯექსი' },
+            { value: 'რეჯ' },
+            { value: 'რეჯწდადა' },
+            { value: 'რეჯდფაწდწა' },
+            { value: 'რეჯდწადწა' },
+            { value: 'რეჯდწადწა' }
+        ];
     }
 }]);
 
 myApp.controller('rhymeCtrl', ['$scope', function ($scope) {
     $scope.uniqueName = 'rhymeTemplatePanel';
-    $scope.searchAction = function (word) {
+    $scope.placeholder = 'ჩაწერეთ გასარითმი სიტყვა';
 
+    $scope.searchAction = function (word) {
+        $scope.result = [
+            { value: word },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' },
+            { value: 'რითმი' }
+        ];
     }
 }]);
 
+
 myApp.controller('wildCardCtrl', ['$scope', function ($scope) {
     $scope.uniqueName = 'wildCardTemplatePanel';
+    $scope.placeholder = 'მიუთითეთ wildCard';
+    $scope.buttonText = 'wildCard-ების მაგალითები'
     $scope.examples = [{
         labelStatus: 'success',
         labelValue: '%',
@@ -93,7 +130,21 @@ myApp.controller('wildCardCtrl', ['$scope', function ($scope) {
     }]
 
     $scope.searchAction = function (word) {
-
+        $scope.result = [
+           { value: word },
+           { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+            { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+            { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+            { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' },
+           { value: 'ვაილდქარდი' }
+        ];
     }
 }]);
 
@@ -115,3 +166,18 @@ myApp.controller('examplesController', ['$scope', function ($scope) {
     }
 }]);
 
+
+myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
+}]);
+
+
+
+
+
+
+
+myApp.run(function () {
+    setTimeout(function () {
+        jQuery('.geokbd').geokbd();
+    }, 400);
+})

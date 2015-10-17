@@ -1,14 +1,21 @@
-myApp.directive('wildCardContent', function() {
+myApp.directive('geoNavbar', function () {
+    return {
+        templateUrl: 'js/directives/geoNavbar.html'
+    };
+});
+
+
+myApp.directive('wildCardContent', function () {
     return {
         templateUrl: 'js/directives/geoPageContent.html',
         controller: "wildCardCtrl",
-        scope:{}
+        scope: {}
     };
 });
 
 myApp.directive('regexContent', function () {
     return {
-        scope:{},
+        scope: {},
         templateUrl: 'js/directives/geoPageContent.html',
         controller: "regexCtrl"
     };
@@ -16,7 +23,7 @@ myApp.directive('regexContent', function () {
 
 myApp.directive('rhymeContent', function () {
     return {
-        scope:{},
+        scope: {},
         templateUrl: 'js/directives/geoPageContent.html',
         controller: "rhymeCtrl"
     };
@@ -24,39 +31,45 @@ myApp.directive('rhymeContent', function () {
 
 
 
-myApp.directive('geoSearchWord', function() {
-    return {
-        templateUrl: 'js/directives/geoSearchInput.html',
-        controller:"searchInputCtrl"
-    };
-});
-
-myApp.directive('geoSearchResult', function() {
-    return {
-        templateUrl: 'js/directives/geoResultTable.html',
-		restrict:'E',
-        scope: {
-           words: '='
-        }
-    };
-})
-
-myApp.directive('geoNavbar', function() {
-    return {
-        templateUrl: 'js/directives/geoNavbar.html'
-    };
-});
 
 
 
-myApp.directive('geoExamplesButton', function() {
+
+
+
+
+myApp.directive('geoExamplesButton', function () {
     return {
         templateUrl: 'js/directives/geoExamplesButton.html',
         restrict: 'E',
-        scope:{
+        scope: {
             examples: '=',
-            uniqueName:'='
+            uniqueName: '=',
+            buttonText:'='
         },
-		controller:'examplesController'
+        controller: 'examplesController'
+    };
+});
+
+myApp.directive('geoSearchWord', function () {
+    return {
+        templateUrl: 'js/directives/geoSearchInput.html',
+        restrict: 'E',
+        scope: {
+            placeholder: '=',
+            uniqueName: '=',
+            searchAction:'='
+        },
+        controller: 'SearchWordCtrl'
+    };
+});
+
+myApp.directive('geoSearchResult', function () {
+    return {
+        templateUrl: 'js/directives/geoResultTable.html',
+        restrict: 'E',
+        scope: {
+            words: '='
+        }
     };
 });

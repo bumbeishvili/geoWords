@@ -1,13 +1,9 @@
 
-<div class="form-group input-group col-md-4 col-lg-4" style="margin-top:20px">
-    <input type="text" ng-model="{{uniqueName}}" ng-required='true' class="form-control geokbd" onload="" placeholder="მიუთითეთ შაბლონი">
-    {{uniqueName}}
-    <span class="input-group-btn">
-        <button class="btn btn-default" ng-disabled="!wordPattern" type="button" ng-click="searchAction({{uniqueName}})">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
-    </span>
-</div>
-<script>
-    jQuery('.geokbd').geokbd();
-</script>
+    <div class="form-group input-group col-md-4 col-lg-4" style="margin-top:20px">
+        <input type="text" ng-model="wordPattern"  required class="form-control geokbd {{uniqueName}}" placeholder="{{placeholder}}"   >
+        <span class="input-group-btn">
+            <button class="btn btn-default" ng-disabled="!wordPattern" ng-click="searchAction(wordPattern)" >  
+                <span class="glyphicon glyphicon-search" aria-hidden="true">  </span>
+            </button>
+        </span>
+    </div>
