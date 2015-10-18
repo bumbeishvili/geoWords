@@ -36,6 +36,7 @@ myApp.controller('regexCtrl', ['$scope', function ($scope) {
     }]
 
     $scope.searchAction = function (word) {
+
         $scope.result = [
             { value: word },
             { value: 'რეჯექსი' },
@@ -79,7 +80,7 @@ myApp.controller('rhymeCtrl', ['$scope', function ($scope) {
 }]);
 
 
-myApp.controller('wildCardCtrl', ['$scope', function ($scope) {
+myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.uniqueName = 'wildCardTemplatePanel';
     $scope.placeholder = 'მიუთითეთ wildCard';
     $scope.buttonText = 'wildCard-ების მაგალითები'
@@ -130,21 +131,19 @@ myApp.controller('wildCardCtrl', ['$scope', function ($scope) {
     }]
 
     $scope.searchAction = function (word) {
-        $scope.result = [
-           { value: word },
-           { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-            { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-            { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-            { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' },
-           { value: 'ვაილდქარდი' }
-        ];
+
+        $scope.result = [];
+        $http.get('php/getWordByWildcard.php', { params: { template: word } }).then(function (response) {
+            $scope.error = '';
+            $scope.result = response.data;
+        }, function (error) {
+            console.log('დაფიქსირებული შეცდომაა:');
+            console.log(error);
+            $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+        });
+
+           
+        
     }
 }]);
 

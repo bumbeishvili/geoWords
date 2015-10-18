@@ -1,4 +1,9 @@
 <div class="container" >
+    <div class="alert alert-danger" ng-show="error" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{error}}
+    </div>
    <geo-examples-button examples="examples"  button-text="buttonText" unique-name="uniqueName"  >   </geo-examples-button>
    <geo-search-word unique-name="uniqueName" placeholder="placeholder" search-action="searchAction"> </geo-search-word>
    <geo-search-result words="result" > </geo-search-result>
