@@ -1,4 +1,4 @@
-var myApp = angular.module('GeoWords', []);
+var myApp = angular.module('GeoWords', ['wc.Directives']);
 
 myApp.controller('pageCtrl', ['$scope', function ($scope) {
 
@@ -178,5 +178,5 @@ myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
 myApp.run(function () {
     setTimeout(function () {
         jQuery('.geokbd').geokbd();
-    }, 400);
+    }, 2000);
 })
