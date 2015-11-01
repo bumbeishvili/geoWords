@@ -1,4 +1,5 @@
-var myApp = angular.module('GeoWords', ['wc.Directives']);
+var myApp = angular.module('GeoWords', ['wc.Directives', 'angular-table']);
+
 
 myApp.controller('pageCtrl', ['$scope', function ($scope) {
 
@@ -134,16 +135,24 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
 
         $scope.result = [];
         $http.get('php/getWordByWildcard.php', { params: { template: word } }).then(function (response) {
-            $scope.error = '';
-            $scope.result = response.data;
+            try {
+                JSON.parse(response);
+                debugger;
+                $scope.error = '';
+                $scope.result = response.data;
+            } catch (e) {
+                console.log('დაფიქსირებული შეცდომაა:');
+                console.log(response);
+                $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+            }
         }, function (error) {
             console.log('დაფიქსირებული შეცდომაა:');
             console.log(error);
             $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
         });
 
-           
-        
+
+
     }
 }]);
 
@@ -168,6 +177,26 @@ myApp.controller('examplesController', ['$scope', function ($scope) {
 
 myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
 }]);
+
+
+
+myApp.controller('ResultTableCtrl', function ($scope) {
+    if (!$scope.list) $scope.list = [];
+    debugger;
+
+    $scope.updateConfig = function (newList) {
+        debugger;
+        $scope.config = {
+            itemsPerPage: newList.length < 20 ? newList.length + 1 : 20,
+            fillLastPage: true,
+            maxPages: 10
+        }
+    }
+    $scope.updateConfig($scope.list);
+    $scope.$watchCollection('list', $scope.updateConfig);
+
+
+});
 
 
 

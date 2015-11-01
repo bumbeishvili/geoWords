@@ -17,21 +17,17 @@
 
 </head>
 <body ng-app="GeoWords" ng-controller="pageCtrl">
-    <div wc-overlay wc-overlay-delay="300">
-        <div class="throbber-loader">
-            Loading…
-        </div>
-    </div>
+
     <geo-navbar></geo-navbar>
     <div class="container body-content">
        
-        <wild-card-content ng-show="contents.wildCardContent.active">
+        <wild-card-content ng-if="contents.wildCardContent.active">
         </wild-card-content>
 
-        <regex-content ng-show="contents.regexContent.active">
+        <regex-content ng-if="contents.regexContent.active">
         </regex-content>
 
-        <rhyme-content ng-show="contents.rhymeContent.active">
+        <rhyme-content ng-if="contents.rhymeContent.active">
         </rhyme-content>
 
 
@@ -43,7 +39,11 @@
             </span>
         </footer>
     </div>
-
+    <div wc-overlay wc-overlay-delay="300">
+        <div class="throbber-loader">
+            Loading…
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -51,6 +51,11 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <script src="js/plugins/pagination/angular-table.min.js"></script>
+    
+
+
     <script src="js/controllers/controllers.js"></script>
     <script src="js/directives/directives.js"></script>
     <script src="js/plugins/loading/wcAngularOverlay.js"></script>

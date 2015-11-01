@@ -31,13 +31,6 @@ myApp.directive('rhymeContent', function () {
 
 
 
-
-
-
-
-
-
-
 myApp.directive('geoExamplesButton', function () {
     return {
         templateUrl: 'js/directives/geoExamplesButton.html',
@@ -69,7 +62,9 @@ myApp.directive('geoSearchResult', function () {
         templateUrl: 'js/directives/geoResultTable.html',
         restrict: 'E',
         scope: {
-            words: '='
-        }
+            list: '='
+        },
+        controller: 'ResultTableCtrl'
     };
 });
+
