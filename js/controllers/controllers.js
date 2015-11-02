@@ -135,12 +135,10 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
 
         $scope.result = [];
         $http.get('php/getWordByWildcard.php', { params: { template: word } }).then(function (response) {
-            try {
-                JSON.parse(response);
-                debugger;
+            if (Object.prototype.toString.call(response.data) === '[object Array]') {
                 $scope.error = '';
                 $scope.result = response.data;
-            } catch (e) {
+            } else {
                 console.log('დაფიქსირებული შეცდომაა:');
                 console.log(response);
                 $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
@@ -153,7 +151,7 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
 
-    }
+}
 }]);
 
 
@@ -182,10 +180,7 @@ myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
 
 myApp.controller('ResultTableCtrl', function ($scope) {
     if (!$scope.list) $scope.list = [];
-    debugger;
-
     $scope.updateConfig = function (newList) {
-        debugger;
         $scope.config = {
             itemsPerPage: newList.length < 20 ? newList.length + 1 : 20,
             fillLastPage: true,

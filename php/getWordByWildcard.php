@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $arr = array();
 
 
@@ -8,25 +8,36 @@ $password   = "testPassword";
 $dbname     = "geoWords";
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$mysqli = new mysqli($servername, $username, $password, $dbname );
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
 }
 
 
-$conn->query("set character_set_results='utf8'");
+if (!$mysqli->set_charset("utf8")) {
+    printf("Error loading character set utf8: %s\n", $mysqli->error);
+    exit();
+} 
 
-$query=("SELECT word_value FROM words where word_value like ?");
+//$conn->query("set character_set_results='utf8'");
+
+$query=("select word_value from words where word_value like ?");  // where word_value like ?
 
 
-if ( $stmt = $conn->prepare($query)) {
-    $stmt->bind_param("s","'დაწ'");
+if ( $stmt = $mysqli->prepare($query)) {
+	
+
+   $stmt->bind_param("s",$_GET['template']);
     /* execute statement */
     $stmt->execute();
-
+	
+	
     /* bind result variables */
     $stmt->bind_result($word_value);
+   
     $counter = 0;
     /* fetch values */
     while ($stmt->fetch()) {
@@ -44,7 +55,7 @@ if ( $stmt = $conn->prepare($query)) {
 }
 
 
-$conn->close();
+$mysqli->close();
 echo (json_encode($arr));
 
 ?>
