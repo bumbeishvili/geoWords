@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $arr = array();
 
 
@@ -24,7 +24,7 @@ if (!$mysqli->set_charset("utf8")) {
 
 //$conn->query("set character_set_results='utf8'");
 
-$query=('select word_value from words where word_value like ?');  // where word_value like ?
+$query=("select word_value from words where word_value rlike ?");  // where word_value like ?
 
 
 if ( $stmt = $mysqli->prepare($query)) {

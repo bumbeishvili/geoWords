@@ -26,35 +26,86 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
     }
 }]);
 
-myApp.controller('regexCtrl', ['$scope', function ($scope) {
+myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.uniqueName = 'regexTemplatePanel';
     $scope.placeholder = 'მიუთითეთ რეჯექსი';
     $scope.buttonText = 'რეჯექსების მაგალითები'
     $scope.examples = [{
         labelStatus: 'success',
+        labelValue: '[აბგ]',
+        definition: 'სიტყვები, რომლებშიც ერთი ასოა ა,ბ ან გ'
+    }, {
+        labelStatus: 'success',
+        labelValue: '[^აბგ]',
+        definition: 'სიტყვები, რომლებშიც ურევია ერთი ა,ბ,გ -სგან განსხვავებული ასო',
+    },
+    {
+        labelStatus: 'success',
         labelValue: '.',
-        definition: 'წამოიღებს მხოლოდ ერთ ასობგერიან სიტყვებს'
-    }]
+        definition: 'სიტყვები, რომელშიც ერთი ნებისმიერი ასო ურევია',
+    },
+    {
+        labelStatus: 'success',
+        labelValue: '[ა-ე]',
+        definition: 'სიტყვები, რომელშიც ერთ-ერთი ასოა ა,ბ,გ,დ ან ე',
+    },
+    {
+        labelStatus: 'success',
+        labelValue: 'ტესტი',
+        definition: 'სიტყვები რომლებშიც "ტესტი" ურევია',
+    }
+    , {
+        labelStatus: 'success',
+        labelValue: '^ტესტი$',
+        definition: ' ^ აღნიშნავს სიტყვის დასაწყისს,$ დასასრულს',
+    }, {
+        labelStatus: 'success',
+        labelValue: '.',
+        definition: 'წამოიღებს სიტყვებს რომელშიც ნებისმიერი ასო  ურევია',
+    }, {
+        labelStatus: 'success',
+        labelValue: '.',
+        definition: 'წამოიღებს სიტყვებს რომელშიც ნებისმიერი ასო  ურევია',
+    }, {
+        labelStatus: 'success',
+        labelValue: '.',
+        definition: 'წამოიღებს სიტყვებს რომელშიც ნებისმიერი ასო  ურევია',
+    }, {
+        labelStatus: 'success',
+        labelValue: '.',
+        definition: 'წამოიღებს სიტყვებს რომელშიც ნებისმიერი ასო  ურევია',
+    }, {
+        labelStatus: 'success',
+        labelValue: '.',
+        definition: 'წამოიღებს სიტყვებს რომელშიც ნებისმიერი ასო  ურევია',
+    }];
+
+
+    /*
+[^abc]	not a, b, or c
+[a-g]	character between a & g
+
+
+    */
 
     $scope.searchAction = function (word) {
-
-        $scope.result = [
-            { value: word },
-            { value: 'რეჯექსი' },
-            { value: 'რეჯ' },
-            { value: 'რეჯწდადა' },
-            { value: 'რეჯდფაწდწა' },
-            { value: 'რეჯდწადწა' },
-            { value: 'რეჯდწადწა' },
-            { value: word },
-            { value: 'რეჯექსი' },
-            { value: 'რეჯ' },
-            { value: 'რეჯწდადა' },
-            { value: 'რეჯდფაწდწა' },
-            { value: 'რეჯდწადწა' },
-            { value: 'რეჯდწადწა' }
-        ];
+        $scope.result = [];
+        $http.get('php/getWordByRegex.php', { params: { template: word } }).then(function (response) {
+            if (Object.prototype.toString.call(response.data) === '[object Array]') {
+                $scope.error = '';
+                $scope.result = response.data;
+            } else {
+                console.log('დაფიქსირებული შეცდომაა:');
+                console.log(response);
+                $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+            }
+        }, function (error) {
+            console.log('დაფიქსირებული შეცდომაა:');
+            console.log(error);
+            $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+        });
     }
+
 }]);
 
 myApp.controller('rhymeCtrl', ['$scope', function ($scope) {
@@ -62,22 +113,24 @@ myApp.controller('rhymeCtrl', ['$scope', function ($scope) {
     $scope.placeholder = 'ჩაწერეთ გასარითმი სიტყვა';
 
     $scope.searchAction = function (word) {
-        $scope.result = [
-            { value: word },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' },
-            { value: 'რითმი' }
-        ];
+        $scope.result = [];
+        $http.get('php/getWordByRegex.php', { params: { template: word } }).then(function (response) {
+            if (Object.prototype.toString.call(response.data) === '[object Array]') {
+                $scope.error = '';
+                $scope.result = response.data;
+            } else {
+                console.log('დაფიქსირებული შეცდომაა:');
+                console.log(response);
+                $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+            }
+        }, function (error) {
+            console.log('დაფიქსირებული შეცდომაა:');
+            console.log(error);
+            $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
+        });
     }
+
+
 }]);
 
 
@@ -148,10 +201,8 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
             console.log(error);
             $scope.error = 'სამწუხაროდ დაფიქსირდა შეცდომა ...';
         });
+    }
 
-
-
-}
 }]);
 
 
@@ -201,6 +252,6 @@ myApp.controller('ResultTableCtrl', function ($scope) {
 
 myApp.run(function () {
     setTimeout(function () {
-        jQuery('.geokbd').geokbd();
+
     }, 2000);
 })
