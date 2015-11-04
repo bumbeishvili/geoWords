@@ -10,7 +10,7 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
         },
         regexContent: {
             active: '',
-            header: 'რეჯექსი'
+            header: 'რეგექსი'
         },
         rhymeContent: {
             active: '',
