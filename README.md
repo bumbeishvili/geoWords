@@ -3,4 +3,4 @@
 
 <b> Status : </b> <code>In development</code>
 <br><br>
-<a href="http://geowords.hostingsiteforfree.com/#/" target='_blank'> Working demo </a>
+<a href="http://geowords.byethost12.com/" target='_blank'> Working demo </a>
