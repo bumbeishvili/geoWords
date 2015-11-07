@@ -38,7 +38,7 @@ myApp.directive('geoExamplesButton', function () {
         scope: {
             examples: '=',
             uniqueName: '=',
-            buttonText:'='
+            buttonText: '='
         },
         controller: 'examplesController'
     };
@@ -51,7 +51,7 @@ myApp.directive('geoSearchWord', function () {
         scope: {
             placeholder: '=',
             uniqueName: '=',
-            searchAction:'='
+            searchAction: '='
         },
         controller: 'SearchWordCtrl'
     };
@@ -68,3 +68,20 @@ myApp.directive('geoSearchResult', function () {
     };
 });
 
+myApp.directive('bindGeoKeyboard', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            toClass:'@'
+        },
+        link: function (scope) {
+            if (!scope.keyboardBinded) {
+                if (scope.toClass) {
+                    jQuery('.'+scope.toClass).geokbd();
+                    scope.keyboardBinded = true;
+                }
+              
+            }
+        }
+    };
+});

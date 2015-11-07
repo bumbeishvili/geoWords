@@ -28,8 +28,8 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
 
 myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.uniqueName = 'regexTemplatePanel';
-    $scope.placeholder = 'მიუთითეთ რეჯექსი';
-    $scope.buttonText = 'რეჯექსების მაგალითები'
+    $scope.placeholder = 'მიუთითეთ რეგექსი';
+    $scope.buttonText = 'რეგექსების მაგალითები'
     $scope.examples = [{
         labelStatus: 'success',
         labelValue: '[აბგ]',
@@ -250,8 +250,3 @@ myApp.controller('ResultTableCtrl', function ($scope) {
 
 
 
-myApp.run(function () {
-    setTimeout(function () {
-
-    }, 2000);
-})
