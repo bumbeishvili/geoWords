@@ -31,6 +31,10 @@ myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.placeholder = 'მიუთითეთ რეგექსი';
     $scope.buttonText = 'რეგექსების მაგალითები'
     $scope.examples = [{
+        labelStatus: 'danger',
+        labelValue: 'გაითვალისწინეთ',
+        definition: ' range-ს [ა-ჰ] გამოყენებისას ბაზაში სიტყვები იძებნება ინგლისური ანბანური მიმდევრობით, ანუ გვექნება [a-h]'
+    },{
         labelStatus: 'success',
         labelValue: '[აბგ]',
         definition: 'სიტყვები, რომლებშიც ერთი ასოა ა,ბ ან გ'
@@ -108,13 +112,13 @@ myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
 
 }]);
 
-myApp.controller('rhymeCtrl', ['$scope', function ($scope) {
+myApp.controller('rhymeCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.uniqueName = 'rhymeTemplatePanel';
     $scope.placeholder = 'ჩაწერეთ გასარითმი სიტყვა';
 
     $scope.searchAction = function (word) {
         $scope.result = [];
-        $http.get('php/getWordByRegex.php', { params: { template: word } }).then(function (response) {
+        $http.get('php/getWordByRhyme.php', { params: { template: word } }).then(function (response) {
             if (Object.prototype.toString.call(response.data) === '[object Array]') {
                 $scope.error = '';
                 $scope.result = response.data;
@@ -166,19 +170,7 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
         labelStatus: 'success',
         labelValue: 'მ_ღლ_ვ_',
         definition: 'წამოიღებს შვიდასოიან სიტყვებს სადაც 1-ლი, მე-3, მე-4 და მე-6 ასოა მ,ღ,ლ,ვ'
-    }, {
-        labelStatus: 'success',
-        labelValue: '[აეიოუ]%',
-        definition: 'წამოიღებს ყველა სიტყვას რომლის პირველი ასო ხმოვანია'
-    }, {
-        labelStatus: 'success',
-        labelValue: '[ა-დ]%',
-        definition: 'წამოიღებს ყველა სიტყვას რომლის პირველი ასო ა-დ შუალედშია'
-    }, {
-        labelStatus: 'success',
-        labelValue: '[^აეიოუ]%',
-        definition: 'წამოიღებს ყველა სიტყვას რომლის პირველი ასო თანხმოვანია'
-    }, {
+    },{
         labelStatus: 'info',
         labelValue: '%ჯი',
         definition: 'დომეინების კრეატიული სახელები'
