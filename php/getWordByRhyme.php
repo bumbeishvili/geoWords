@@ -8,16 +8,33 @@ echo $param . '<br>';
 
 echo "<br>";
 $vowelsCount   = vowelsCount($string);
-$rhymeExpert   = '$';
-$rhymeMedium   = '$';
-$rhymeBeginner = '$';
+
+$rhymeLevel1Regex   = '$';
+$rhymeLevel2Regex   = '$';
+$rhymeLevel3Regex   = '$';
+$rhymeLevel4Regex   = '$';
+$rhymeLevel5Regex   = '$';
+$rhymeLevel6Regex   = '$';
 
 $splitedArray = splitBackPartByVowel($string);
 print_r($splitedArray);
-/*
-if($vowelsCount>0){
 
+if($vowelsCount>0){
+  $ConsonantReplacer1="";
+  if($splitedArray[5]!=''){
+	  $ConsonantReplacer1=$splitedArray[5];
+  }
+  $rhymeLevel1Regex=$splitedArray[4].$ConsonantReplacer1.$rhymeLevel1Regex;
+  
+  
+  
+  
+  
+  
+  $rhymeLevel6Regex=$splitedArray[4].'[^aeiou]*'.$rhymeLevel6Regex;
 }
+printRegexes();
+/*
 if($vowelsCount>1){
 
 }
@@ -25,6 +42,18 @@ if($vowelsCount>1){
 
 }
 */
+function printRegexes(){
+	global $rhymeLevel1Regex ,$rhymeLevel2Regex,$rhymeLevel3Regex ,$rhymeLevel4Regex ,$rhymeLevel5Regex,$rhymeLevel6Regex;
+	echo "<br>";
+	echo $rhymeLevel1Regex.'<br>'; 
+	echo $rhymeLevel2Regex.'<br>'; 
+	echo $rhymeLevel3Regex.'<br>'; 
+	echo $rhymeLevel4Regex.'<br>'; 
+	echo $rhymeLevel5Regex.'<br>'; 
+	echo $rhymeLevel6Regex.'<br>'; 
+}
+// "satesto"    returns 'a','t','e','st','o,''
+// "vefxvisebr" returns 'e','fxv','i','s','e','br'
 function splitBackPartByVowel($string)
 {
     $array   = array(
@@ -41,18 +70,14 @@ function splitBackPartByVowel($string)
             break;
         //contains vowel
         if (strpos('aeiou', $string[$i]) !== false) {
-            
             if ($counter % 2 == 1) {
                 $counter--;
             }
-            echo "vowel " . $string[$i] . ' ' . $counter . "<br>";
             $array[$counter--] = $string[$i];
         } else {
             //contains consonant
-            echo "consonant " . $string[$i] . ' ' . $counter . "<br>";
             $subStrLength = 0;
             while ($i >= 0) {
-                
                 if (strpos('aeiou', $string[$i]) !== false) {
                     break;
                 }
@@ -65,11 +90,16 @@ function splitBackPartByVowel($string)
             }
         }
     }
-    
     return $array;
 }
 
 
+function getRelatedConsonants($ch){
+    $allRelatedConsonats = array('bfpm','dTt','v','Zcwzs','jCWJS','gqkRx','y','h','nrl');
+	foreach( $allRelatedConsonats as $relatedConsonants){
+		if (strpos($relatedConsonants,$ch) !== false) return $relatedConsonants;
+	}
+}
 function vowelsCount($string)
 {
     $count = 0;
