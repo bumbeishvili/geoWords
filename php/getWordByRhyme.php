@@ -21,17 +21,24 @@ print_r($splitedArray);
 
 if($vowelsCount>0){
   $ConsonantReplacer1="";
+  $ConsonantReplacer2="";
+  $ConsonantReplacer3="";
+  $ConsonantReplacer4="";
+  $ConsonantReplacer5="";
+  $ConsonantReplacer6="[^aeiou]*";
   if($splitedArray[5]!=''){
 	  $ConsonantReplacer1=$splitedArray[5];
+	  $ConsonantReplacer2="";
+	  $ConsonantReplacer3="";
+      $ConsonantReplacer4="";
+      $ConsonantReplacer5="";
   }
   $rhymeLevel1Regex=$splitedArray[4].$ConsonantReplacer1.$rhymeLevel1Regex;
-  
-  
-  
-  
-  
-  
-  $rhymeLevel6Regex=$splitedArray[4].'[^aeiou]*'.$rhymeLevel6Regex;
+  $rhymeLevel2Regex=$splitedArray[4].$ConsonantReplacer2.$rhymeLevel2Regex;
+  $rhymeLevel3Regex=$splitedArray[4].$ConsonantReplacer3.$rhymeLevel3Regex;
+  $rhymeLevel4Regex=$splitedArray[4].$ConsonantReplacer4.$rhymeLevel4Regex;
+  $rhymeLevel5Regex=$splitedArray[4].$ConsonantReplacer5.$rhymeLevel5Regex;
+  $rhymeLevel6Regex=$splitedArray[4].$ConsonantReplacer6.$rhymeLevel6Regex;
 }
 printRegexes();
 /*
@@ -53,7 +60,7 @@ function printRegexes(){
 	echo $rhymeLevel6Regex.'<br>'; 
 }
 // "satesto"    returns 'a','t','e','st','o,''
-// "vefxvisebr" returns 'e','fxv','i','s','e','br'
+// "vefxvisebr" returns 'e','fxv','i','s','e ','br'
 function splitBackPartByVowel($string)
 {
     $array   = array(
