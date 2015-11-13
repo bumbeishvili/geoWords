@@ -107,6 +107,17 @@ function getRelatedConsonants($ch){
 		if (strpos($relatedConsonants,$ch) !== false) return $relatedConsonants;
 	}
 }
+
+
+
+function generateConsonantRegex($consonants,$repeatNumberRegex){
+    $result='';
+    for ($i = 0; $i < strlen($consonants); $i++) {
+       $result=$result.'['.getRelatedConsonants($consonants($i)).']'.$repeatNumberRegex;
+    }
+    return $result;
+}
+
 function vowelsCount($string)
 {
     $count = 0;
