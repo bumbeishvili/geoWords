@@ -30,8 +30,8 @@ if($vowelsCount>0){
 	  $ConsonantReplacer1=$splitedArray[5];
 	  $ConsonantReplacer2="";
 	  $ConsonantReplacer3="";
-      $ConsonantReplacer4="";
-      $ConsonantReplacer5="";
+          $ConsonantReplacer4="";
+          $ConsonantReplacer5="";
   }
   $rhymeLevel1Regex=$splitedArray[4].$ConsonantReplacer1.$rhymeLevel1Regex;
   $rhymeLevel2Regex=$splitedArray[4].$ConsonantReplacer2.$rhymeLevel2Regex;
