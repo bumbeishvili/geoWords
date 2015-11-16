@@ -25,52 +25,42 @@ $splitedArray = splitBackPartByVowel($string);
   $ConsonantReplacer5="";
   $ConsonantReplacer6="[^aeiou]*";
   
-if($vowelsCount>0){
-  if($splitedArray[5]!=''){
-	  $ConsonantReplacer1=$splitedArray[5];
-	  $ConsonantReplacer2=generateConsonantRegex($splitedArray[5],'{1}');
-	  $ConsonantReplacer3=generateConsonantRegex($splitedArray[5],'{1,}');
-      $ConsonantReplacer4="";
-      $ConsonantReplacer5="";
-  }
-  $rhymeLevel1Regex=$splitedArray[4].$ConsonantReplacer1.$rhymeLevel1Regex;
-  $rhymeLevel2Regex=$splitedArray[4].$ConsonantReplacer2.$rhymeLevel2Regex;
-  $rhymeLevel3Regex=$splitedArray[4].$ConsonantReplacer3.$rhymeLevel3Regex;
-  $rhymeLevel4Regex=$splitedArray[4].$ConsonantReplacer4.$rhymeLevel4Regex;
-  $rhymeLevel5Regex=$splitedArray[4].$ConsonantReplacer5.$rhymeLevel5Regex;
-  $rhymeLevel6Regex=$splitedArray[4].$ConsonantReplacer6.$rhymeLevel6Regex;
+if($splitedArray[5]!=''){
+  $rhymeLevel1Regex=$splitedArray[5].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=generateConsonantRegex($splitedArray[5],'{1}').$rhymeLevel2Regex;
+  $rhymeLevel3Regex=generateConsonantRegex($splitedArray[5],'{1,}').$rhymeLevel3Regex;
 }
-if($vowelsCount>1){
-  if($splitedArray[3]!=''){
-	  $ConsonantReplacer1=$splitedArray[5];
-	  $ConsonantReplacer2=generateConsonantRegex($splitedArray[3],'{1}');
-	  $ConsonantReplacer3=generateConsonantRegex($splitedArray[3],'{1,}');
-      $ConsonantReplacer4="";
-      $ConsonantReplacer5="";
-  }
-  $rhymeLevel1Regex=$splitedArray[2].$ConsonantReplacer1.$rhymeLevel1Regex;
-  $rhymeLevel2Regex=$splitedArray[2].$ConsonantReplacer2.$rhymeLevel2Regex;
-  $rhymeLevel3Regex=$splitedArray[2].$ConsonantReplacer3.$rhymeLevel3Regex;
-  $rhymeLevel4Regex=$splitedArray[2].$ConsonantReplacer4.$rhymeLevel4Regex;
-  $rhymeLevel5Regex=$splitedArray[2].$ConsonantReplacer5.$rhymeLevel5Regex;
-  $rhymeLevel6Regex=$splitedArray[2].$ConsonantReplacer6.$rhymeLevel6Regex;
+if($splitedArray[4]!=''){
+  $rhymeLevel1Regex=$splitedArray[4].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=$splitedArray[4].$rhymeLevel2Regex;
+  $rhymeLevel3Regex=$splitedArray[4].$rhymeLevel3Regex;
 }
 
-if($vowelsCount>2){
- if($splitedArray[1]!=''){
-	  $ConsonantReplacer1=$splitedArray[1];
-	  $ConsonantReplacer2=generateConsonantRegex($splitedArray[1],'{1}');
-	  $ConsonantReplacer3=generateConsonantRegex($splitedArray[1],'{1,}');
-      $ConsonantReplacer4="";
-      $ConsonantReplacer5="";
-  }
-  $rhymeLevel1Regex=$splitedArray[0].$ConsonantReplacer1.$rhymeLevel1Regex;
-  $rhymeLevel2Regex=$splitedArray[0].$ConsonantReplacer2.$rhymeLevel2Regex;
-  $rhymeLevel3Regex=$splitedArray[0].$ConsonantReplacer3.$rhymeLevel3Regex;
-  $rhymeLevel4Regex=$splitedArray[0].$ConsonantReplacer4.$rhymeLevel4Regex;
-  $rhymeLevel5Regex=$splitedArray[0].$ConsonantReplacer5.$rhymeLevel5Regex;
-  $rhymeLevel6Regex=$splitedArray[0].$ConsonantReplacer6.$rhymeLevel6Regex;
+if($splitedArray[3]!=''){
+  $rhymeLevel1Regex=$splitedArray[3].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=generateConsonantRegex($splitedArray[3],'{1}').$rhymeLevel2Regex;
+  $rhymeLevel3Regex=generateConsonantRegex($splitedArray[3],'{1,}').$rhymeLevel3Regex;
 }
+
+if($splitedArray[2]!=''){
+  $rhymeLevel1Regex=$splitedArray[2].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=$splitedArray[2].$rhymeLevel2Regex;
+  $rhymeLevel3Regex=$splitedArray[2].$rhymeLevel3Regex;
+}
+
+if($splitedArray[1]!=''){
+  $rhymeLevel1Regex=$splitedArray[1].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=generateConsonantRegex($splitedArray[1],'{1,}').$rhymeLevel2Regex;
+}
+
+if($splitedArray[0]!=''){
+  $rhymeLevel1Regex=$splitedArray[0].$rhymeLevel1Regex;
+  $rhymeLevel2Regex=$splitedArray[0].$rhymeLevel2Regex;
+}
+
+
+
+
 
 
 //printRegexes();
@@ -103,7 +93,9 @@ if($vowelsCount>2){
         exit();
     }
     $query = "select word_geo word_geo,
-                (word_eng regexp(?))  + (word_eng regexp(?) ) accuracy,
+                (word_eng regexp(?))  + 
+				(word_eng regexp(?) )+ 
+				(word_eng regexp(?) ) accuracy,
                 levenshtein(word_eng,?) distance
              from words
              where word_eng rlike ?
@@ -117,7 +109,10 @@ if($vowelsCount>2){
 			 
     if ($stmt = $mysqli->prepare($query)) {
 		
-        $stmt->bind_param("ssss",$rhymeLevel2Regex,$rhymeLevel3Regex,$param,$rhymeLevel3Regex);
+        $stmt->bind_param("sssss",
+		                 $rhymeLevel1Regex,
+		                 $rhymeLevel2Regex,
+						 $rhymeLevel3Regex,$string,$rhymeLevel3Regex);
         /* execute statement */
 		
         $stmt->execute();
@@ -216,10 +211,10 @@ function getRelatedConsonants($ch){
 
 
 
-function generateConsonantRegex($consonants,$repeatNumberRegex){
+function generateConsonantRegex($consonants,$appendRegex){
     $result='';
     for ($i = 0; $i < strlen($consonants); $i++) {
-      $result=$result.'['.getRelatedConsonants($consonants[$i]).']'.$repeatNumberRegex;
+      $result=$result.'['.getRelatedConsonants($consonants[$i]).']'.$appendRegex;
     }
     return $result;
 }
