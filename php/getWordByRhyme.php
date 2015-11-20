@@ -4,7 +4,7 @@ include 'common.php';
 $param  = $_GET['template'];
 $param = Converter::ToLatin($param);
 $string = Converter::ToLatin($param);
-
+$GLOBALS['RhymeWord'] = $string;
 $vowelsCount   = vowelsCount($string);
 
 $rhymeLevel1Regex   = '$';
@@ -95,11 +95,10 @@ if($splitedArray[0]!=''){
     $query = "select word_geo word_geo,
                 (word_eng regexp(?))  + 
 				(word_eng regexp(?) )+ 
-				(word_eng regexp(?) ) accuracy,
-                levenshtein(word_eng,?) distance
+				(word_eng regexp(?) ) accuracy
              from words
              where word_eng rlike ?
-             order by accuracy desc,distance asc";
+             order by accuracy desc";
 			 
 		//	 ?=e[dTt]{1,}e[nrl]{1,}i$'
 		//	 ?=e[dTt]{1}e[nrl]{1}i$,
@@ -109,17 +108,18 @@ if($splitedArray[0]!=''){
 			 
     if ($stmt = $mysqli->prepare($query)) {
 		
-        $stmt->bind_param("sssss",
+        $stmt->bind_param("ssss",
 		                 $rhymeLevel1Regex,
 		                 $rhymeLevel2Regex,
-						 $rhymeLevel3Regex,$string,$rhymeLevel3Regex);
+						 $rhymeLevel3Regex,
+						 $rhymeLevel3Regex);
         /* execute statement */
 		
         $stmt->execute();
         
         
         // bind result variables 
-        $stmt->bind_result($word_value,$word_accuracy,$word_distance);
+        $stmt->bind_result($word_value,$word_accuracy);
         
         $counter = 0;
         //fetch values 
@@ -128,8 +128,8 @@ if($splitedArray[0]!=''){
                 break;
             }
             array_push($arr, array(
-                'id' => $counter,
-                'value' => $word_value
+                'value' => $word_value,
+				'accuracy' => $word_accuracy
             ));
         }
         
@@ -142,13 +142,25 @@ if($splitedArray[0]!=''){
     
 
 
+usort($arr,"comparer");
+for($i=0;$i<count($arr);$i++){
+	$arr[$i]['id']= $i;
+}
 
 
 echo (json_encode($arr));
 
-
-
-
+function comparer($a,$b){
+	if($a['accuracy']>$b['accuracy']) return  -1;
+	if($a['accuracy']<$b['accuracy']) return 1;
+	if($a['accuracy']==$b['accuracy']) {
+		$aLev = levenshtein(Converter::ToLatin($a['value']),$GLOBALS['RhymeWord']);
+		$bLev = levenshtein(Converter::ToLatin($b['value']),$GLOBALS['RhymeWord']);
+		if($aLev > $bLev) return  1;
+		if($aLev < $bLev) return -1;
+		return 0;
+	}
+}
 
 function printRegexes(){
 	global $rhymeLevel1Regex ,$rhymeLevel2Regex,$rhymeLevel3Regex ,$rhymeLevel4Regex ,$rhymeLevel5Regex,$rhymeLevel6Regex;
