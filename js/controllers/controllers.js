@@ -98,6 +98,9 @@ myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
             if (Object.prototype.toString.call(response.data) === '[object Array]') {
                 $scope.error = '';
                 $scope.result = response.data;
+                if (response.data.length === 0) {
+                    $scope.error = 'ჩანაწერები არ მოიძებნა';
+                }
             } else {
                 console.log('დაფიქსირებული შეცდომაა:');
                 console.log(response);
@@ -122,6 +125,9 @@ myApp.controller('rhymeCtrl', ['$scope', '$http', function ($scope, $http) {
             if (Object.prototype.toString.call(response.data) === '[object Array]') {
                 $scope.error = '';
                 $scope.result = response.data;
+                if (response.data.length === 0) {
+                    $scope.error = 'ჩანაწერები არ მოიძებნა';
+                }
             } else {
                 console.log('დაფიქსირებული შეცდომაა:');
                 console.log(response);
@@ -183,6 +189,9 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
             if (Object.prototype.toString.call(response.data) === '[object Array]') {
                 $scope.error = '';
                 $scope.result = response.data;
+                if (response.data.length === 0) {
+                    $scope.error = 'ჩანაწერები არ მოიძებნა';
+                }
             } else {
                 console.log('დაფიქსირებული შეცდომაა:');
                 console.log(response);

@@ -1,22 +1,20 @@
 
 <?php
-
-
-
-function extractResult($filterType,$param)
+function getDbCredentials()
 {
-    
-    
-    $arr = array();
-    
-    
-    $servername = "localhost";
-    $username   = "testUser";
-    $password   = "testPassword";
-    $dbname     = "geoWords";
-    
+    return array(
+        "servername" => "localhost",
+        "username" => "testUser",
+        "password" => "testPassword",
+        "dbname" => "geoWords"
+    );
+}
+
+function getMysqli()
+{
+    $credentials = getDbCredentials();
     // Create connection
-    $mysqli = new mysqli($servername, $username, $password, $dbname);
+    $mysqli      = new mysqli($credentials["servername"], $credentials["username"], $credentials["password"], $credentials["dbname"]);
     
     /* check connection */
     if (mysqli_connect_errno()) {
@@ -24,43 +22,54 @@ function extractResult($filterType,$param)
         exit();
     }
     
-    
     if (!$mysqli->set_charset("utf8")) {
         printf("Error loading character set utf8: %s\n", $mysqli->error);
         exit();
     }
-    $query = "select word_geo from words where word_eng ".$filterType." ? ";
+    return $mysqli;
+}
+
+function getStatementByQueryFromMysqli($query, $mysqli)
+{
     if ($stmt = $mysqli->prepare($query)) {
-		
-        $param=Converter::ToLatin($param);
-        $stmt->bind_param("s", $param);
-        /* execute statement */
-		
-        $stmt->execute();
-        
-        
-        // bind result variables 
-        $stmt->bind_result($word_value);
-        
-        $counter = 0;
-        //fetch values 
-        while ($stmt->fetch()) {
-            if ($counter++ > 999) {
-                break;
-            }
-            array_push($arr, array(
-                'id' => $counter,
-                'value' => $word_value
-            ));
-        }
-        
-        /* close statement */
-        $stmt->close();
-    }
-    
-    
+        return $stmt;
+    } else
+        return -1;
+}
+
+function closeConnections($stmt, $mysqli)
+{
+    /* close statement */
+    $stmt->close();
     $mysqli->close();
+}
+
+function extractResult($filterType, $param)
+{
     
+    $arr    = array();
+    $query  = "select word_geo from words where word_eng " . $filterType . " ? ";
+    $mysqli = getMysqli();
+    $stmt   = getStatementByQueryFromMysqli($query, $mysqli);
+    $param  = Converter::ToLatin($param);
+    $stmt->bind_param("s", $param);
+    /* execute statement */
+    $stmt->execute();
+    // bind result variables 
+    $stmt->bind_result($word_value);
+    
+    $counter = 0;
+    //fetch values 
+    while ($stmt->fetch()) {
+        if ($counter++ > 999) {
+            break;
+        }
+        array_push($arr, array(
+            'id' => $counter,
+            'value' => $word_value
+        ));
+    }
+    closeConnections($stmt, $mysqli);
     return $arr;
     
 }
