@@ -29,6 +29,14 @@ myApp.directive('rhymeContent', function () {
     };
 });
 
+myApp.directive('statisticContent', function () {
+    return {
+        scope: {},
+        templateUrl: 'js/directives/statisticContent.html',
+        controller: "statisticCtrl"
+    };
+});
+
 
 
 myApp.directive('geoExamplesButton', function () {

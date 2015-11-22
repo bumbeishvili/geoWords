@@ -112,3 +112,11 @@ body {
   animation: throbber-loader 2000ms 450ms infinite ease-out;
   right: -1.6em;
 }
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+.no-padding{
+   padding:0px;
+}

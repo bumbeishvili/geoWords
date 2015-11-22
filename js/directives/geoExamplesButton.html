@@ -1,7 +1,7 @@
 
 <div ng-show="{{examples.length}}">
     <button ng-click="slidePlease()" class="btn btn-info examples" type="button">
-        {{buttonText}} <span class="glyphicon glyphicon-chevron-down"></span>
+        {{buttonText}} <span class="glyphicon glyphicon-chevron-{{arrow}}"></span>
     </button>
     <div id="{{uniqueName}}" style="display:none">
         <table>

@@ -4,20 +4,25 @@ var myApp = angular.module('GeoWords', ['wc.Directives', 'angular-table']);
 myApp.controller('pageCtrl', ['$scope', function ($scope) {
 
     $scope.contents = {
-        wildCardContent: {
-            active: 'active',
-            header: 'wildCards'
-        },
-        regexContent: {
-            active: '',
-            header: 'რეგექსი'
-        },
+
         rhymeContent: {
             active: '',
             header: 'რითმა'
+        },
+        wildCardContent: {
+            active: '',
+            header: 'wildCard-ით ძებნა'
+        },
+        regexContent: {
+            active: '',
+            header: 'რეგექსით ძებნა'
+        },
+        statisticContent: {
+            active: 'active',
+            header: 'სტატისტიკა'
         }
     }
-    $scope.currentActiveContent = $scope.contents.wildCardContent;
+    $scope.currentActiveContent = $scope.contents.statisticContent;
 
     $scope.changeCurrentContent = function (choosedContent) {
         $scope.currentActiveContent.active = '';
@@ -34,7 +39,7 @@ myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
         labelStatus: 'danger',
         labelValue: 'გაითვალისწინეთ',
         definition: ' range-ს [ა-ჰ] გამოყენებისას ბაზაში სიტყვები იძებნება ინგლისური ანბანური მიმდევრობით, ანუ გვექნება [a-h]'
-    },{
+    }, {
         labelStatus: 'success',
         labelValue: '[აბგ]',
         definition: 'სიტყვები, რომლებშიც ერთი ასოა ა,ბ ან გ'
@@ -176,7 +181,7 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
         labelStatus: 'success',
         labelValue: 'მ_ღლ_ვ_',
         definition: 'წამოიღებს შვიდასოიან სიტყვებს სადაც 1-ლი, მე-3, მე-4 და მე-6 ასოა მ,ღ,ლ,ვ'
-    },{
+    }, {
         labelStatus: 'info',
         labelValue: '%ჯი',
         definition: 'დომეინების კრეატიული სახელები'
@@ -206,21 +211,28 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
 
 }]);
 
+myApp.controller('statisticCtrl', ['$scope', '$http', function ($scope, $http) {
+    $http.get('php/getWidgetStatistics.php').then(function (response) {
+        $scope.widgetStatistics = response.data;
+    });
+
+    $http.get('php/getTableStatistics.php', { params: { flag: "word" } }).then(function (response) {
+        $scope.commonWords = response.data;
+    });
+
+    $http.get('php/getTableStatistics.php', { params: { flag: "char" } }).then(function (response) {
+        $scope.commonChars = response.data;
+    });
+
+}]);
+
+
 
 myApp.controller('examplesController', ['$scope', function ($scope) {
-    $scope.isExpanding = true;
+    $scope.arrow = 'down';
     $scope.slidePlease = function () {
         $("#" + $scope.uniqueName).slideToggle("slow");
-        if ($scope.isExpanding) {
-            $(".examples span").removeClass("glyphicon-chevron-down");
-            $(".examples span").addClass("glyphicon-chevron-up")
-            $scope.isExpanding = false;
-        }
-        else {
-            $(".examples span").removeClass("glyphicon-chevron-up")
-            $(".examples span").addClass("glyphicon-chevron-down");
-            $scope.isExpanding = true;
-        }
+        $scope.arrow = ($scope.arrow == 'down' ? 'up' : 'down');
     }
 }]);
 
