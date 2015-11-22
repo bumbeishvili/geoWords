@@ -6,7 +6,7 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
     $scope.contents = {
 
         rhymeContent: {
-            active: '',
+            active: 'active',
             header: 'რითმა'
         },
         wildCardContent: {
@@ -18,11 +18,11 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
             header: 'რეგექსით ძებნა'
         },
         statisticContent: {
-            active: 'active',
+            active: '',
             header: 'სტატისტიკა'
         }
     }
-    $scope.currentActiveContent = $scope.contents.statisticContent;
+    $scope.currentActiveContent = $scope.contents.rhymeContent;
 
     $scope.changeCurrentContent = function (choosedContent) {
         $scope.currentActiveContent.active = '';
