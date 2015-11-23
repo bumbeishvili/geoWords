@@ -30,7 +30,7 @@
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
                         <span ng-bind="widgetStatistics.mostCommonWord"></span>
-                        (<span ng-bind="widgetStatistics.mostCommonWordCount|number:0"></span>)
+                        (<span ng-bind="(widgetStatistics.mostCommonWordCount/widgetStatistics.allWordsCount|number:2)+' %'"></span>)
                     </h3>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
                         <span ng-bind="widgetStatistics.mostCommonChar"></span>
-                        (<span ng-bind="widgetStatistics.mostCommonCharCount|number:0"></span>) 
+                        (<span ng-bind="(widgetStatistics.mostCommonCharCount/widgetStatistics.allCharsCount|number:2)+' %'"></span>) 
                     </h3>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
                         <span ng-bind="widgetStatistics.lessCommonChar"></span>
-                        (<span ng-bind="widgetStatistics.lessCommonCharCount|number:0"></span>)
+						(<span ng-bind="(widgetStatistics.lessCommonCharCount/widgetStatistics.allCharsCount|number:2)+' %'"></span>) 
                     </h3>
                 </div>
             </div>
