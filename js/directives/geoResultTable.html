@@ -1,15 +1,15 @@
 
-<div>
+<div controlle="ResultCtrl">
 
-    <span class="label label-info"> სიტყვების რაოდენობაა {{ list.length }} </span>
+    <span class="label label-info">{{root.trnsl('words_quantity')}}  {{ list.length }} </span>
     <table class="table table-striped table-bordered" at-table at-paginated at-list="list" at-config="config">
         <thead>
 
         </thead>
         <tbody>
             <tr>
-                <td at-implicit at-sortable at-attribute="id" width="150" at-initial-sorting="asc" at-title="ნომერი"></td>
-                <td at-implicit at-sortable at-attribute="value" width="250" at-title="სიტყვები"></td>
+                <td at-implicit at-sortable at-attribute="id" width="150" at-initial-sorting="asc" at-title="{{root.trnsl('nomer')}}"></td>
+                <td at-implicit at-sortable at-attribute="value" width="250" at-title="{{root.trnsl('word')}}"></td>
             </tr>
         </tbody>
     </table>

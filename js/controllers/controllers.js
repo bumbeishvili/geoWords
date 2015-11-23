@@ -1,40 +1,139 @@
 var myApp = angular.module('GeoWords', ['wc.Directives', 'angular-table']);
 
+myApp.run(function ($rootScope) {
+    $rootScope.labels = {};
 
-myApp.controller('pageCtrl', ['$scope', function ($scope) {
+    $rootScope.geoLabels = {
+        search: 'მოძებნე',
+        rhyme: 'რითმა',
+        wildcard_search: 'wildCard-ით ძებნა',
+        regex_search: 'რეგექსით ძებნა',
+        statistics: 'სტატისტიკა',
+        input_regex: 'მიუთითეთ რეგექსი',
+        regex_examples: 'რეგექსების მაგალითები',
+        input_rhymed_word: 'ჩაწერეთ გასარითმი სიტყვა',
+        input_wildcard: 'მიუთითეთ wildCard',
+        wildcard_examples: 'wildCard-ების მაგალითები',
+        word: 'სიტყვა',
+        nomer:'ნომერი',
+        words_quantity:'სიტყვების რაოდენობაა'
+    };
 
-    $scope.contents = {
+    $rootScope.engLabels = {
+        search: 'Search',
+        rhyme: 'Rhyme'
+    };
 
-        rhymeContent: {
-            active: 'active',
-            header: 'რითმა'
-        },
-        wildCardContent: {
-            active: '',
-            header: 'wildCard-ით ძებნა'
-        },
-        regexContent: {
-            active: '',
-            header: 'რეგექსით ძებნა'
-        },
-        statisticContent: {
-            active: '',
-            header: 'სტატისტიკა'
+    $rootScope.geoLang = function () {
+        if ($rootScope.currentLang !== 'geo') {
+            $rootScope.labels = $rootScope.geoLabels;
+            createCookie("lang", "geo", 30);
+            location.reload();
         }
     }
-    $scope.currentActiveContent = $scope.contents.rhymeContent;
 
-    $scope.changeCurrentContent = function (choosedContent) {
-        $scope.currentActiveContent.active = '';
-        $scope.currentActiveContent = choosedContent;
-        $scope.currentActiveContent.active = 'active';
+    $rootScope.engLang = function () {
+        if ($rootScope.currentLang !== 'eng') {
+            createCookie("lang", "eng", 30);
+            $rootScope.labels = $rootScope.engLabels;
+            location.reload();
+        }
     }
+
+    $rootScope.trnsl = function (key) {
+        var word = $rootScope.labels[key];
+        if (word != undefined) {
+            return word;
+        };
+        return key;
+    };
+  
+    function initialiseLanguage() {
+        $rootScope.currentLang = getCookie('lang');
+        setLanguage($rootScope.currentLang);
+    }
+    function setLanguage(lang) {
+        if (lang === 'geo') {
+            $rootScope.labels = $rootScope.geoLabels;
+        } else {
+            $rootScope.labels = $rootScope.engLabels;
+        }
+    }
+    var createCookie = function (name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        }
+        else {
+            expires = "";
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) {
+                    c_end = document.cookie.length;
+                }
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+
+    initialiseLanguage()
+
+});
+
+
+myApp.controller('pageCtrl', ['$scope', function ($scope) {
+    function load() {
+        $scope.contents = {
+
+            rhymeContent: {
+                active: 'active',
+                header: $scope.trnsl('rhyme')
+            },
+            wildCardContent: {
+                active: '',
+                header: $scope.trnsl('wildcard_search')
+            },
+            regexContent: {
+                active: '',
+                header: $scope.trnsl('regex_search')
+            },
+            statisticContent: {
+                active: '',
+                header: $scope.trnsl('statistics')
+            }
+        }
+
+        $scope.currentActiveContent = $scope.contents.rhymeContent;
+
+        $scope.changeCurrentContent = function (choosedContent) {
+            $scope.currentActiveContent.active = '';
+            $scope.currentActiveContent = choosedContent;
+            $scope.currentActiveContent.active = 'active';
+        }
+    }
+    
+    load();
+    $scope.$on('languageChanged', function (event) {
+        load();
+        console.log('test');
+    });
 }]);
 
-myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('regexCtrl', ['$scope', '$http','$rootScope', function ($scope, $http,$rootScope) {
     $scope.uniqueName = 'regexTemplatePanel';
-    $scope.placeholder = 'მიუთითეთ რეგექსი';
-    $scope.buttonText = 'რეგექსების მაგალითები'
+    $scope.placeholder = $rootScope.trnsl("input_regex");
+    $scope.buttonText = $rootScope.trnsl("regex_examples"); 
     $scope.examples = [{
         labelStatus: 'danger',
         labelValue: 'გაითვალისწინეთ',
@@ -120,9 +219,10 @@ myApp.controller('regexCtrl', ['$scope', '$http', function ($scope, $http) {
 
 }]);
 
-myApp.controller('rhymeCtrl', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('rhymeCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'rhymeTemplatePanel';
-    $scope.placeholder = 'ჩაწერეთ გასარითმი სიტყვა';
+    $scope.placeholder = $rootScope.trnsl("input_rhymed_word"); //'ჩაწერეთ გასარითმი სიტყვა'
+   
 
     $scope.searchAction = function (word) {
         $scope.result = [];
@@ -149,10 +249,10 @@ myApp.controller('rhymeCtrl', ['$scope', '$http', function ($scope, $http) {
 }]);
 
 
-myApp.controller('wildCardCtrl', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('wildCardCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'wildCardTemplatePanel';
-    $scope.placeholder = 'მიუთითეთ wildCard';
-    $scope.buttonText = 'wildCard-ების მაგალითები'
+    $scope.placeholder = $rootScope.trnsl("input_wildcard");
+    $scope.buttonText = $rootScope.trnsl("wildcard_examples");
     $scope.examples = [{
         labelStatus: 'success',
         labelValue: '%',
@@ -242,7 +342,8 @@ myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
 
 
 
-myApp.controller('ResultTableCtrl', function ($scope) {
+myApp.controller('ResultTableCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
+    $scope.root = $rootScope;
     if (!$scope.list) $scope.list = [];
     $scope.updateConfig = function (newList) {
         $scope.config = {
@@ -255,7 +356,7 @@ myApp.controller('ResultTableCtrl', function ($scope) {
     $scope.$watchCollection('list', $scope.updateConfig);
 
 
-});
+}]);
 
 
 

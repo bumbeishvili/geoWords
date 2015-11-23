@@ -1,6 +1,6 @@
 <?php
 $myArray = array();
-$myArray['uniqueWordsCount'] = 200000;
+$myArray['uniqueWordsCount'] = 212719;
 $myArray['allWordsCount'] = 180000000;
 $myArray['allCharsCount'] = 708000000;
 $myArray['mostCommonWordCount'] = 1236485;
