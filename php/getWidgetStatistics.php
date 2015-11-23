@@ -1,13 +1,13 @@
 <?php
 $myArray = array();
-$myArray['uniqueWordsCount'] = 212719;
-$myArray['allWordsCount'] = 180000000;
-$myArray['allCharsCount'] = 708000000;
-$myArray['mostCommonWordCount'] = 1236485;
+$myArray['uniqueWordsCount'] = 206713;
+$myArray['allWordsCount'] = 1772256;
+$myArray['allCharsCount'] = 11598338;
+$myArray['mostCommonWordCount'] = 85748;
 $myArray['mostCommonWord'] = 'და';
-$myArray['mostCommonCharCount'] = 8000000;
+$myArray['mostCommonCharCount'] = 1790653;
 $myArray['mostCommonChar'] = 'ა';
-$myArray['lessCommonCharCount'] = 5700000;
-$myArray['lessCommonChar'] = 'წ';
+$myArray['lessCommonCharCount'] = 6442;
+$myArray['lessCommonChar'] = 'ჟ';
 echo json_encode($myArray);
 ?>

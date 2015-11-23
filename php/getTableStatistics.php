@@ -4,46 +4,46 @@ $myArray = array();
 if ($flag == 'word') {
     array_push($myArray, array(
         'text' => 'და',
-        'quantity' => 10245054
+        'quantity' => 85748
     ));
     array_push($myArray, array(
-        'text' => 'ან',
-        'quantity' => 1024054
+        'text' => 'რომ',
+        'quantity' => 19088
     ));
 	    array_push($myArray, array(
-        'text' => 'კი',
-        'quantity' => 1020000
+        'text' => 'არ',
+        'quantity' => 17698
     ));
 	    array_push($myArray, array(
-        'text' => 'არა',
-        'quantity' => 1004054
+        'text' => 'ამ',
+        'quantity' => 9541
     ));
 	    array_push($myArray, array(
-        'text' => 'კაცი',
-        'quantity' => 102405
+        'text' => 'ეს',
+        'quantity' => 9436
     ));
 }
 
 if ($flag == 'char') {
     array_push($myArray, array(
         'text' => 'ა',
-        'quantity' => 102145054
+        'quantity' => 1790653
     ));
     array_push($myArray, array(
         'text' => 'ი',
-        'quantity' => 75000147
+        'quantity' => 1275043
     ));
 	    array_push($myArray, array(
-        'text' => 'ლ',
-        'quantity' => 20000047
+        'text' => 'ე',
+        'quantity' => 1020838
     ));
 	    array_push($myArray, array(
-        'text' => 'კ',
-        'quantity' => 1004054
+        'text' => 'რ',
+        'quantity' => 677465
     ));
 	    array_push($myArray, array(
-        'text' => 'მ',
-        'quantity' => 1402405
+        'text' => 'ს',
+        'quantity' => 744809
     ));
 }
 

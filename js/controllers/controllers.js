@@ -15,8 +15,8 @@ myApp.run(function ($rootScope) {
         input_wildcard: 'მიუთითეთ wildCard',
         wildcard_examples: 'wildCard-ების მაგალითები',
         word: 'სიტყვა',
-        nomer:'ნომერი',
-        words_quantity:'სიტყვების რაოდენობაა'
+        nomer: 'ნომერი',
+        words_quantity: 'სიტყვების რაოდენობაა'
     };
 
     $rootScope.engLabels = {
@@ -47,7 +47,7 @@ myApp.run(function ($rootScope) {
         };
         return key;
     };
-  
+
     function initialiseLanguage() {
         $rootScope.currentLang = getCookie('lang');
         setLanguage($rootScope.currentLang);
@@ -122,7 +122,7 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
             $scope.currentActiveContent.active = 'active';
         }
     }
-    
+
     load();
     $scope.$on('languageChanged', function (event) {
         load();
@@ -130,10 +130,10 @@ myApp.controller('pageCtrl', ['$scope', function ($scope) {
     });
 }]);
 
-myApp.controller('regexCtrl', ['$scope', '$http','$rootScope', function ($scope, $http,$rootScope) {
+myApp.controller('regexCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'regexTemplatePanel';
     $scope.placeholder = $rootScope.trnsl("input_regex");
-    $scope.buttonText = $rootScope.trnsl("regex_examples"); 
+    $scope.buttonText = $rootScope.trnsl("regex_examples");
     $scope.examples = [{
         labelStatus: 'danger',
         labelValue: 'გაითვალისწინეთ',
@@ -222,7 +222,7 @@ myApp.controller('regexCtrl', ['$scope', '$http','$rootScope', function ($scope,
 myApp.controller('rhymeCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'rhymeTemplatePanel';
     $scope.placeholder = $rootScope.trnsl("input_rhymed_word"); //'ჩაწერეთ გასარითმი სიტყვა'
-   
+
 
     $scope.searchAction = function (word) {
         $scope.result = [];
