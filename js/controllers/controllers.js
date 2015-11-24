@@ -25,23 +25,35 @@ myApp.run(function ($rootScope) {
     };
 
     $rootScope.geoLang = function () {
+        $rootScope.labels = $rootScope.geoLabels;
+
+        $rootScope.$broadcast('languageChanged');
+        /*
         if ($rootScope.currentLang !== 'geo') {
             $rootScope.labels = $rootScope.geoLabels;
             createCookie("lang", "geo", 30);
             location.reload();
         }
+        */
     }
 
     $rootScope.engLang = function () {
+        $rootScope.labels = $rootScope.engLabels;
+
+        $rootScope.$broadcast('languageChanged');
+
+        /*
         if ($rootScope.currentLang !== 'eng') {
             createCookie("lang", "eng", 30);
             $rootScope.labels = $rootScope.engLabels;
             location.reload();
         }
+        */
     }
 
     $rootScope.trnsl = function (key) {
         var word = $rootScope.labels[key];
+
         if (word != undefined) {
             return word;
         };
@@ -92,48 +104,44 @@ myApp.run(function ($rootScope) {
 });
 
 
-myApp.controller('pageCtrl', ['$scope', function ($scope) {
-    function load() {
-        $scope.contents = {
+myApp.controller('pageCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    $scope.root = $rootScope;
 
-            rhymeContent: {
-                active: 'active',
-                header: $scope.trnsl('rhyme')
-            },
-            wildCardContent: {
-                active: '',
-                header: $scope.trnsl('wildcard_search')
-            },
-            regexContent: {
-                active: '',
-                header: $scope.trnsl('regex_search')
-            },
-            statisticContent: {
-                active: '',
-                header: $scope.trnsl('statistics')
-            }
-        }
+    $scope.contents = {
 
-        $scope.currentActiveContent = $scope.contents.rhymeContent;
-
-        $scope.changeCurrentContent = function (choosedContent) {
-            $scope.currentActiveContent.active = '';
-            $scope.currentActiveContent = choosedContent;
-            $scope.currentActiveContent.active = 'active';
+        rhymeContent: {
+            active: 'active',
+            header: 'rhyme'
+        },
+        wildCardContent: {
+            active: '',
+            header: 'wildcard_search'
+        },
+        regexContent: {
+            active: '',
+            header: 'regex_search'
+        },
+        statisticContent: {
+            active: '',
+            header: 'statistics'
         }
     }
 
-    load();
-    $scope.$on('languageChanged', function (event) {
-        load();
-        console.log('test');
-    });
+    $scope.currentActiveContent = $scope.contents.rhymeContent;
+
+    $scope.changeCurrentContent = function (choosedContent) {
+        $scope.currentActiveContent.active = '';
+        $scope.currentActiveContent = choosedContent;
+        $scope.currentActiveContent.active = 'active';
+    }
+
 }]);
 
 myApp.controller('regexCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
+    $scope.root = $rootScope;
     $scope.uniqueName = 'regexTemplatePanel';
-    $scope.placeholder = $rootScope.trnsl("input_regex");
-    $scope.buttonText = $rootScope.trnsl("regex_examples");
+    $scope.placeholder = "input_regex";
+    $scope.buttonText = "regex_examples";
     $scope.examples = [{
         labelStatus: 'danger',
         labelValue: 'გაითვალისწინეთ',
@@ -221,7 +229,7 @@ myApp.controller('regexCtrl', ['$scope', '$http', '$rootScope', function ($scope
 
 myApp.controller('rhymeCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'rhymeTemplatePanel';
-    $scope.placeholder = $rootScope.trnsl("input_rhymed_word"); //'ჩაწერეთ გასარითმი სიტყვა'
+    $scope.placeholder ="input_rhymed_word"; //'ჩაწერეთ გასარითმი სიტყვა'
 
 
     $scope.searchAction = function (word) {
@@ -251,8 +259,8 @@ myApp.controller('rhymeCtrl', ['$scope', '$http', '$rootScope', function ($scope
 
 myApp.controller('wildCardCtrl', ['$scope', '$http', '$rootScope', function ($scope, $http, $rootScope) {
     $scope.uniqueName = 'wildCardTemplatePanel';
-    $scope.placeholder = $rootScope.trnsl("input_wildcard");
-    $scope.buttonText = $rootScope.trnsl("wildcard_examples");
+    $scope.placeholder = "input_wildcard";
+    $scope.buttonText ="wildcard_examples";
     $scope.examples = [{
         labelStatus: 'success',
         labelValue: '%',
@@ -337,7 +345,8 @@ myApp.controller('examplesController', ['$scope', function ($scope) {
 }]);
 
 
-myApp.controller('SearchWordCtrl', ['$scope', function ($scope) {
+myApp.controller('SearchWordCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    $scope.root = $rootScope;
 }]);
 
 

@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse container" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class='list-nav {{content.active}}' ng-repeat="content in contents">
-                    <a href="#" ng-click="changeCurrentContent(content)">{{content.header}}</a>
+                    <a href="#" ng-click="changeCurrentContent(content)">{{root.trnsl(content.header)}}</a>
                 </li>
             </ul>
             <div class="pull-right" style="margin-top:9px;">
