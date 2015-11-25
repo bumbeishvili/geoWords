@@ -26,29 +26,10 @@ myApp.run(function ($rootScope) {
 
     $rootScope.geoLang = function () {
         $rootScope.labels = $rootScope.geoLabels;
-
-        $rootScope.$broadcast('languageChanged');
-        /*
-        if ($rootScope.currentLang !== 'geo') {
-            $rootScope.labels = $rootScope.geoLabels;
-            createCookie("lang", "geo", 30);
-            location.reload();
-        }
-        */
     }
 
     $rootScope.engLang = function () {
         $rootScope.labels = $rootScope.engLabels;
-
-        $rootScope.$broadcast('languageChanged');
-
-        /*
-        if ($rootScope.currentLang !== 'eng') {
-            createCookie("lang", "eng", 30);
-            $rootScope.labels = $rootScope.engLabels;
-            location.reload();
-        }
-        */
     }
 
     $rootScope.trnsl = function (key) {
@@ -336,7 +317,8 @@ myApp.controller('statisticCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
 
-myApp.controller('examplesController', ['$scope', function ($scope) {
+myApp.controller('examplesController', ['$scope','$rootScope', function ($scope,$rootScope) {
+    $scope.root=$rootScope;
     $scope.arrow = 'down';
     $scope.slidePlease = function () {
         $("#" + $scope.uniqueName).slideToggle("slow");
