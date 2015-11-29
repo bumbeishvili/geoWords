@@ -61,14 +61,20 @@ myApp.run(function ($rootScope) {
 
     $rootScope.geoLang = function () {
         $rootScope.labels = $rootScope.geoLabels;
+<<<<<<< .merge_file_a04532
 		createCookie("lang","geo",30);
 		$rootScope.currentLang='geo';
+=======
+>>>>>>> .merge_file_a08496
     }
 
     $rootScope.engLang = function () {
         $rootScope.labels = $rootScope.engLabels;
+<<<<<<< .merge_file_a04532
 		createCookie("lang","eng",30);
 		$rootScope.currentLang='eng';
+=======
+>>>>>>> .merge_file_a08496
     }
 
     $rootScope.trnsl = function (key,y) {
@@ -363,8 +369,12 @@ myApp.controller('statisticCtrl', ['$scope', '$http','$rootScope', function ($sc
 
 
 
+<<<<<<< .merge_file_a04532
 myApp.controller('examplesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
 	
+=======
+myApp.controller('examplesController', ['$scope','$rootScope', function ($scope,$rootScope) {
+>>>>>>> .merge_file_a08496
     $scope.root=$rootScope;
     $scope.arrow = 'down';
     $scope.slidePlease = function () {
