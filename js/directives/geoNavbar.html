@@ -17,8 +17,8 @@
                 </li>
             </ul>
             <div class="pull-right" style="margin-top:9px;">
-                <button ng-click="geoLang()" class="btn btn-default">geo</button>
-                <button ng-click="engLang()" class="btn btn-default">eng</button>
+                <button ng-click="geoLang()" ng-disabled="currentLang=='geo'" class="btn btn-default">geo</button>
+                <button ng-click="engLang()" ng-disabled="currentLang=='eng'" class="btn btn-default">eng</button>
             </div>
             
         </div><!-- /.navbar-collapse -->

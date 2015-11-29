@@ -2,57 +2,57 @@
     <div class="col-sm-12 no-padding">
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading">უნიკალური სიტყვების რაოდენობა</div>
+                <div class="panel-heading">{{root.trnsl('unik_words_count')}}</div>
                 <div class="panel-body">
-                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.uniqueWordsCount|number:0"></h3>
+                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.UniqueWordsCount|number:0"></h3>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading">მთლიანი სიტყვების რაოდენობა</div>
+                <div class="panel-heading">{{root.trnsl('all_words_count')}}</div>
                 <div class="panel-body">
-                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.allWordsCount|number:0"></h3>
+                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.AllWordsCount|number:0"></h3>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading">ასო-ბგერების რაოდენობა</div>
+                <div class="panel-heading">{{root.trnsl('characters_count')}}</div>
                 <div class="panel-body">
-                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.allCharsCount|number:0"></h3>
+                    <h3 class="text-center col-centered" ng-bind="widgetStatistics.AllCharCount|number:0"></h3>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading">ყველაზე განმეორებადი სიტყვა</div>
+                <div class="panel-heading">{{root.trnsl('most_repeated_word')}}</div>
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
-                        <span ng-bind="widgetStatistics.mostCommonWord"></span>
-                        (<span ng-bind="(widgetStatistics.mostCommonWordCount/widgetStatistics.allWordsCount*100|number:2)+' %'"></span>)
+                        <span ng-bind="commonWords[0].title"></span>
+                        (<span ng-bind="(commonWords[0].quantity/widgetStatistics.AllWordsCount*100|number:2)+' %'"></span>)
                     </h3>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading">ყველაზე განმეორებადი ასო-ბგერა</div>
+                <div class="panel-heading">{{root.trnsl('most_repeated_character')}}</div>
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
-                        <span ng-bind="widgetStatistics.mostCommonChar"></span>
-                        (<span ng-bind="(widgetStatistics.mostCommonCharCount/widgetStatistics.allCharsCount*100|number:2)+' %'"></span>) 
+                        <span ng-bind="commonChars[0].title"></span>
+                        (<span ng-bind="(commonChars[0].quantity/widgetStatistics.AllCharCount*100|number:2)+' %'"></span>) 
                     </h3>
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-success">
-                <div class="panel-heading"> ნაკლებ განმეორებადი ასო-ბგერა</div>
+                <div class="panel-heading"> {{root.trnsl('less_repeated_character')}}</div>
                 <div class="panel-body">
                     <h3 class="text-center col-centered">
-                        <span ng-bind="widgetStatistics.lessCommonChar"></span>
-						(<span ng-bind="(widgetStatistics.lessCommonCharCount/widgetStatistics.allCharsCount*100|number:2)+' %'"></span>) 
+                        <span ng-bind="commonChars[32].title"></span>
+						(<span ng-bind="(commonChars[32].quantity/widgetStatistics.AllCharCount*100|number:2)+' %'"></span>) 
                     </h3>
                 </div>
             </div>
@@ -61,38 +61,38 @@
     <div class="col-sm-12 ">
         <div class="col-sm-6 no-padding">
             <div class="panel panel-info">
-                <div class="panel-heading"> 33 ყველაზე განმეორებადი სიტყვა </div>
+                <div class="panel-heading"> 33 {{root.trnsl('most_repeated_word')}}</div>
                 <table class="table table-striped table-bordered table-hover">
                     <tr>
                         <th>#</th>
-                        <th>სიტყვა</th>
-                        <th>რაოდენობა ბაზაში</th>
-                        <th>პროცენტული ფარდობა</th>
+                        <th>{{root.trnsl('word')}}</th>
+                        <th>{{root.trnsl('quantity_in_db')}}</th>
+                        <th>{{root.trnsl('percent')}}</th>
                     </tr>
                     <tr ng-repeat="item in commonWords">
                         <td ng-bind="$index+1"></td>
-                        <td ng-bind="item.text"></td>
+                        <td ng-bind="item.title"></td>
                         <td ng-bind="item.quantity|number:0"></td>
-                        <td ng-bind="(item.quantity/widgetStatistics.allWordsCount*100|number:2)+' %'"></td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllWordsCount*100|number:3)+' %'"></td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="col-sm-6 no-padding">
             <div class="panel panel-info">
-                <div class="panel-heading"> ასო ბგერათა სიხშირე </div>
+                <div class="panel-heading">{{root.trnsl('characters_frequency')}}  </div>
                 <table class="table table-striped table-bordered table-hover">
                     <tr>
                         <th>#</th>
-                        <th>ასო-ბგერა</th>
-                        <th>რაოდენობა ბაზაში</th>
-                        <th>პროცენტული ფარდობა</th>
+                        <th>{{root.trnsl('character')}}</th>
+                         <th>{{root.trnsl('quantity_in_db')}}</th>
+                        <th>{{root.trnsl('percent')}}</th>
                     </tr>
                     <tr ng-repeat="item in commonChars">
                         <td ng-bind="$index+1"></td>
-                        <td ng-bind="item.text"></td>
+                        <td ng-bind="item.title"></td>
                         <td ng-bind="item.quantity|number:0"></td>
-                        <td ng-bind="(item.quantity/widgetStatistics.allCharsCount*100|number:2)+' %'"></td>
+                        <td ng-bind="(item.quantity/widgetStatistics.AllCharCount*100|number:3)+' %'"></td>
                     </tr>
                 </table>
             </div>

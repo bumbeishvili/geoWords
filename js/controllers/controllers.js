@@ -16,42 +16,65 @@ myApp.run(function ($rootScope) {
         wildcard_examples: 'wildCard-ების მაგალითები',
         word: 'სიტყვა',
         nomer: 'ნომერი',
-        words_quantity: 'სიტყვების რაოდენობაა'
+        words_quantity: 'სიტყვების რაოდენობაა',
+		unik_words_count:'უნიკალური სიტყვების რაოდენობა',
+		all_words_count:'მთლიანი სიტყვების რაოდენობა',
+		characters_count:'ასო-ბგერების რაოდენობა',
+		most_repeated_word:'ყველაზე განმეორებადი სიტყვა',
+		most_repeated_character:'ყველაზე განმეორებადი ასო-ბგერა',
+		less_repeated_character:'ნაკლებ განმეორებადი ასო-ბგერა',
+		most_repeated_word:' ყველაზე განმეორებადი სიტყვა ',
+		word:'სიტყვა',
+		quantity_in_db:'რაოდენობა ბაზაში',
+		percent:'პროცენტული ფარდობა',
+		characters_frequency:'ასო ბგერათა სიხშირე',
+		character:'ასო-ბგერა'
     };
 
     $rootScope.engLabels = {
         search: 'Search',
-        rhyme: 'Rhyme'
+        rhyme: 'Rhyme',
+        wildcard_search: 'WildCard search',
+        regex_search: 'Regex Search',
+        statistics: 'Statistics',
+        input_regex: 'Input regex',
+        regex_examples: 'Regex examples',
+        input_rhymed_word: 'Input rhyme word',
+        input_wildcard: 'Input wildCard',
+        wildcard_examples: 'WildCard examples',
+        word: 'Word',
+        nomer: 'Nomer',
+        words_quantity: 'Words quantity',
+		unik_words_count:'Unique words quantity',
+		all_words_count:'All words count',
+		characters_count:'Characters count',
+		most_repeated_word:'Most repeated word',
+		most_repeated_character:'Most repeated character',
+		less_repeated_character:'Less repeated character',
+		most_repeated_word:'Most repeated word',
+		word:'word',
+		quantity_in_db:'Quantity in database',
+		percent:'Percent',
+		characters_frequency:'Characters frequency',
+		character:'character'
     };
 
     $rootScope.geoLang = function () {
         $rootScope.labels = $rootScope.geoLabels;
-
-        $rootScope.$broadcast('languageChanged');
-        /*
-        if ($rootScope.currentLang !== 'geo') {
-            $rootScope.labels = $rootScope.geoLabels;
-            createCookie("lang", "geo", 30);
-            location.reload();
-        }
-        */
+		createCookie("lang","geo",30);
+		$rootScope.currentLang='geo';
     }
 
     $rootScope.engLang = function () {
         $rootScope.labels = $rootScope.engLabels;
-
-        $rootScope.$broadcast('languageChanged');
-
-        /*
-        if ($rootScope.currentLang !== 'eng') {
-            createCookie("lang", "eng", 30);
-            $rootScope.labels = $rootScope.engLabels;
-            location.reload();
-        }
-        */
+		createCookie("lang","eng",30);
+		$rootScope.currentLang='eng';
     }
 
-    $rootScope.trnsl = function (key) {
+    $rootScope.trnsl = function (key,y) {
+		if(y){
+			debugger;
+		}
         var word = $rootScope.labels[key];
 
         if (word != undefined) {
@@ -62,6 +85,9 @@ myApp.run(function ($rootScope) {
 
     function initialiseLanguage() {
         $rootScope.currentLang = getCookie('lang');
+		if(!$rootScope.currentLang){
+			createCookie("lang","eng",30);
+		}
         setLanguage($rootScope.currentLang);
     }
     function setLanguage(lang) {
@@ -319,16 +345,17 @@ myApp.controller('wildCardCtrl', ['$scope', '$http', '$rootScope', function ($sc
 
 }]);
 
-myApp.controller('statisticCtrl', ['$scope', '$http', function ($scope, $http) {
+myApp.controller('statisticCtrl', ['$scope', '$http','$rootScope', function ($scope, $http,$rootScope) {
+	$scope.root=$rootScope;
     $http.get('php/getWidgetStatistics.php').then(function (response) {
         $scope.widgetStatistics = response.data;
     });
 
-    $http.get('php/getTableStatistics.php', { params: { flag: "word" } }).then(function (response) {
+    $http.get('php/getTableStatistics.php', { params: { flag: "MostCommonWords" } }).then(function (response) {
         $scope.commonWords = response.data;
     });
 
-    $http.get('php/getTableStatistics.php', { params: { flag: "char" } }).then(function (response) {
+    $http.get('php/getTableStatistics.php', { params: { flag: "GeoCharsCount" } }).then(function (response) {
         $scope.commonChars = response.data;
     });
 
@@ -336,7 +363,9 @@ myApp.controller('statisticCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
 
-myApp.controller('examplesController', ['$scope', function ($scope) {
+myApp.controller('examplesController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+	
+    $scope.root=$rootScope;
     $scope.arrow = 'down';
     $scope.slidePlease = function () {
         $("#" + $scope.uniqueName).slideToggle("slow");
