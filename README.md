@@ -1,6 +1,12 @@
 # geoWords
  <code>DML</code> მანიპულაციები ქართული სიტყვების ბაზაზე
 
-<b> Status : </b> <code>In development</code>
+<b> Status : </b> <code>First iteration completed</code>
 <br><br>
-<a href="http://geowords.ga/" target='_blank'> Working demo </a>
+ამჟამად ბაზაში არსებულ ქართულ სიტყვებში შესაძლებელია
+* მსგავსი რითმის მქონე სიტყვების ძებნა
+* სიტყვების ძებნა ვაილდქარდებით
+* სიტყვების ძებნა რეგექსით
+* ბაზაში არსებული სიტყვების მთლიანი სტატისტიკის ნახვა
+
+იხილეთ <a href="http://geowords.ga/" target='_blank'> შედეგი</a>
