@@ -1,7 +1,7 @@
 # geoWords
  <code>DML</code> მანიპულაციები ქართული სიტყვების ბაზაზე
 
-<b> Status : </b> <code>First iteration completed</code>
+<b> Status : </b> <code>Partly completed</code>
 <br><br>
 ამჟამად ბაზაში არსებულ ქართულ სიტყვებში შესაძლებელია
 * მსგავსი რითმის მქონე სიტყვების ძებნა
