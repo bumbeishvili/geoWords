@@ -4,7 +4,7 @@
         {{root.trnsl(buttonText)}} <span class="glyphicon glyphicon-chevron-{{arrow}}"></span>
     </button>
     <div id="{{uniqueName}}" style="display:none">
-        <table>
+        <table class="table table-bordered table-striped">
             <tr ng-repeat='example in examples'>
                 <td>
                     <span class="label label-{{example.labelStatus}}">{{example.labelValue}}</span>
