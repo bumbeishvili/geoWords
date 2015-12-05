@@ -9,6 +9,6 @@
 * სიტყვების ძებნა რეგექსით
 * ბაზაში არსებული სიტყვების მთლიანი სტატისტიკის ნახვა
 
-გაუსინჯეთ გემო პროექტს  <a href="http://geowords.ga/" target='_blank'>  აქ </a>
+გაუსინჯეთ გემო პროექტს  <a href="http://geowords.ga/" target='_blank'>  აქ ...</a>
 
 ქართული სიტყვების  mysql ბაზა შეგიძლიათ ნახოთ ამ <a  href="https://github.com/bumbeishvili/GeoWordsDatabase" target="_blank">რეპოზიტორიში</a>
