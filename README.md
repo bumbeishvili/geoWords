@@ -10,3 +10,5 @@
 * ბაზაში არსებული სიტყვების მთლიანი სტატისტიკის ნახვა
 
 იხილეთ <a href="http://geowords.ga/" target='_blank'> შედეგი</a>
+
+ქართული სიტყვების ბაზა  mysql ბაზა შეგიძლიათ ნახოთ ამ <a  href="https://github.com/bumbeishvili/GeoWordsDatabase" target="_blank">რეპოზიტორიში</a>
