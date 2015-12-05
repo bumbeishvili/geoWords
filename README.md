@@ -11,4 +11,4 @@
 
 იხილეთ <a href="http://geowords.ga/" target='_blank'> შედეგი</a>
 
-ქართული სიტყვების ბაზა  mysql ბაზა შეგიძლიათ ნახოთ ამ <a  href="https://github.com/bumbeishvili/GeoWordsDatabase" target="_blank">რეპოზიტორიში</a>
+ქართული სიტყვების  mysql ბაზა შეგიძლიათ ნახოთ ამ <a  href="https://github.com/bumbeishvili/GeoWordsDatabase" target="_blank">რეპოზიტორიში</a>
