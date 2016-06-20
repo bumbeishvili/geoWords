@@ -1,7 +1,7 @@
 # geoWords
  `DML` მანიპულაციები ქართული სიტყვების ბაზაზე
 
-**Status :** <code>Partly completed</code>
+**Status :** <code>Partialy completed</code>
 
 
 
